@@ -1,0 +1,22 @@
+{
+  "name": "secure-media-vault",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "edge/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter web dev\" \"pnpm --filter api dev\"",
+    "build": "pnpm --filter web build && pnpm --filter api build",
+    "test": "pnpm --filter api test",
+    "db:migrate": "supabase db push",
+    "db:seed": "psql $SUPABASE_DB_URL -f supabase/seed/seed_users.sql",
+    "db:reset": "supabase db reset"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "typescript": "^5.2.2",
+    "pnpm": "^8.9.0"
+  }
+}
